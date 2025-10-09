@@ -1,6 +1,6 @@
 #!/bin/bash
 VERSION="1.0.1"
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$( cd -- "$( dirname -- "$(readlink -f "${BASH_SOURCE[0]}")" )" &> /dev/null && pwd )
 DIR="."
 TEMPLATE="isc_lab.tex"
 
@@ -11,7 +11,7 @@ TEMPLATE="isc_lab.tex"
 while getopts ":i:n:t:h:o:" option; do
    case $option in
       i) # Input file
-         input="$OPTARG"         
+         input="$OPTARG"
          ;;
       n) # Working directory
          DIR="$OPTARG"
@@ -20,11 +20,11 @@ while getopts ":i:n:t:h:o:" option; do
          echo "- Using oral exam template"
          TEMPLATE="isc_oral_exam.tex"
          ;;
-      h) # not yet implemented         
+      h) # not yet implemented
          echo "For building an oral exam using the specific template switch, -t"
          exit
          ;;
-      o) # Destination of PDF file        
+      o) # Destination of PDF file
          DEST_PDF="$OPTARG"
          ;;
       \?) # Invalid option
@@ -35,7 +35,7 @@ done
 
 if ([ -z "$input" ]); then
    file=("$DIR"/*.md)
-   input=${file[0]}       
+   input=${file[0]}
 fi
 
 if [ -z "$input" ]; then
@@ -53,10 +53,10 @@ pushd "$DIR" || exit
 # We also pass the current script directory path for pandoc to find the template. We also require to pass the toolchain directory for including the image once. For this reason, we pass the location of the directory as a variable (which is not escaped by pandoc, and not as a metadata (which is the same as the values given in the YAML header of the .md))
 pandoc "${input}" -o "${output}" --pdf-engine=xelatex --from markdown+tex_math_dollars+raw_tex --template="$SCRIPT_DIR/$TEMPLATE" --listings -V colorlinks --number-sections --variable=TOOLCHAINPATH:"$SCRIPT_DIR" --metadata=DRAFT:false --metadata=GENERATORVERSION:"$VERSION" #--verbose
 
-if [ -n "$DEST_PDF" ]; then    
-   echo "- Output generated in ${output} and copied to PDF directory ${DEST_PDF}"   
+if [ -n "$DEST_PDF" ]; then
+   echo "- Output generated in ${output} and copied to PDF directory ${DEST_PDF}"
    cp "${output}" "${DEST_PDF}"
-else 
+else
    echo "- Output generated in ${output}"
 fi
 

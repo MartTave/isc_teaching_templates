@@ -1,6 +1,6 @@
 #!/bin/bash
 VERSION="1.0.7"
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$( cd -- "$( dirname -- "$(readlink -f "${BASH_SOURCE[0]}")" )" &> /dev/null && pwd )
 DIR="."
 MATH_ENGINE="katex"
 TOC=true
