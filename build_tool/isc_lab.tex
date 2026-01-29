@@ -590,17 +590,17 @@ $endif$
 \else % if not pdftex
   $if(mainfont)$
   $else$
-  
+
 
   % Changed by mui for Xetex
   \usepackage[default, lining]{sourcesanspro}
-  
+
   % \usepackage[]{sourcecodepro}
-  % \usepackage[scaled=1.05]{beramono}   
-  % \usepackage[scale=1.1]{sourcecodepro}  
+  % \usepackage[scaled=1.05]{beramono}
+  % \usepackage[scale=1.1]{sourcecodepro}
 
   % At last, here are the correct options with correct straight quotes, numbers that look good
-  \usepackage[nomap, lining, medium, scaled=1.1]{FiraMono} 
+  \usepackage[nomap, lining, medium, scaled=1.1]{FiraMono}
   \usepackage{fontawesome5}
 
   %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
@@ -784,7 +784,7 @@ $if(listings)$
 %   numbers          = left,
 %   xleftmargin      = 2.7em,
 %   framexleftmargin = 2.5em,
-% $endif$  
+% $endif$
   upquote      = true,
   breaklines   = false,
   tabsize      = 2,
@@ -1103,7 +1103,7 @@ $else$
 \usepackage{lastpage}
 \usepackage{graphicx}
 
-% mui - automatic inclusion of loading of paths, to 
+% mui - automatic inclusion of loading of paths, to
 % avoid reproducing the shared files in every sub-directory
 \graphicspath{{figs/}{$TOOLCHAINPATH$/}{./}}
 
@@ -1112,7 +1112,7 @@ $else$
 \newcommand{\hesfootleft}
   {
     \begin{footnotesize}
-      $for(author)$$author$$sep$, $endfor$ $$\mid$$ \emph{$ue$ $course$}      
+      $for(author)$$author$$sep$, $endfor$ $$\mid$$ \emph{$ue$ $course$}
     \end{footnotesize}
   }
 \newcommand{\hesfootmiddle}
@@ -1207,6 +1207,16 @@ $endif$
 %%
 %% end added
 %%
+
+% Fix for Pandoc 3.2.1+ \pandocbounded command
+\makeatletter
+\@ifundefined{pandocbounded}{
+  \usepackage{graphicx}
+  \newcommand{\pandocbounded}[1]{%
+    \resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{#1}%
+  }
+}{}
+\makeatother
 
 \begin{document}
 
