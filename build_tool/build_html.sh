@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION="1.0.7"
+VERSION="1.0.8"
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 DIR="."
 MATH_ENGINE="katex"

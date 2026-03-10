@@ -41,6 +41,11 @@ Note that the evaluation window directly displays the return type and value of t
     def bar(x: Int, y: Boolean) = "Hello"
     ```
 
+What is the most difficult :
+
+- Finding nice things to 
+- Have fun
+
 <!-- bar: (x: Int, y: Boolean)String -->
 
 # Exercise 2 -- Getting our hands dirty (difficulty :star:) 
