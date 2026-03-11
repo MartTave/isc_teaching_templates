@@ -1,7 +1,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=isc-teaching-templates-git
 _gitname=isc_teaching_templates
-pkgver=0.0.2.r0.ga48f1f9 # This will be updated by the pkgver() function
+pkgver=0.0.2.r4.gcf2e5fa # This will be updated by the pkgver() function
 pkgrel=1
 pkgdesc="Templates and tools for creating exams, labs, and series for the ISC curriculum."
 arch=('any')

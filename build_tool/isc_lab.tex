@@ -965,13 +965,16 @@ $if(listings)$
   }
 }[keywords,comments,strings]
 
+
+
 \lstdefinelanguage{sql}{
   style = framed,
   keywords={SELECT, FROM, WHERE, AND, OR, IN, LIKE, GROUP, BY,
             ORDER, HAVING, JOIN, ON, CURRENT_DATE, INTERVAL, DESC, ASC, AS, DISTINCT,
             INSERT, UPDATE, DELETE, CREATE, TABLE, VIEW, DROP, ALTER, INDEX,
             CONSTRAINT, PRIMARY, KEY, FOREIGN, REFERENCES, NOT, UNIQUE, INTO,
-            VALUES, EXISTS, SET, LIMIT, FOR, SKIP, LOCKED, COUNT},
+            VALUES, EXISTS, SET, LIMIT, FOR, SKIP, LOCKED, COUNT,
+            AVG, SUM, LEFT, CURRENT_TIMESTAMP, UNION},
   keywords=[2]{INTEGER, INT, VARCHAR, CHAR, TEXT, BOOLEAN, DATE, TIME, TIMESTAMP,
               FLOAT, DOUBLE, DECIMAL, BIGINT, SMALLINT, NULL, JSON, JSONB, SERIAL},
   sensitive=false,
@@ -979,12 +982,10 @@ $if(listings)$
   morecomment=[l]--,
   morestring=[b]',
   morestring=[b]"
-  numbers=left,
-  numberstyle=\tiny\color{gray},
-  numbersep=5pt,
   columns=fullflexible,
   showstringspaces=false,
   tabsize=2,
+  numbers=none,
   keepspaces=true,
   showspaces=false,
   showtabs=false,
@@ -995,6 +996,17 @@ $if(listings)$
   stringstyle=\color{OliveGreen},
 }
 
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+
+\lstset{
+  language=Python,
+  numbers=left,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{violet},
+  commentstyle=\itshape\color{gray},
+  stringstyle=\color{darkgreen}
+}
+\newcommand{\pyinline}[1]{\colorbox{gray!10}{\lstinline[language=Python]{#1}}}
 
 \lstdefinelanguage{json}{
     basicstyle=\ttfamily\small,
@@ -1208,16 +1220,6 @@ $endif$
 %% end added
 %%
 
-% Fix for Pandoc 3.2.1+ \pandocbounded command
-\makeatletter
-\@ifundefined{pandocbounded}{
-  \usepackage{graphicx}
-  \newcommand{\pandocbounded}[1]{%
-    \resizebox{\ifdim\width>\linewidth\linewidth\else\width\fi}{!}{#1}%
-  }
-}{}
-\makeatother
-
 \begin{document}
 
 %%
@@ -1364,7 +1366,7 @@ $endif$
 % For coping with the logo
 \begin{tikzpicture}[remember picture,overlay]
 	\node[anchor=north east,inner sep=0pt] at ($$(current page.north east)-(1.3cm,0.8cm)$$) {
-    \includegraphics[height=1.5cm]{figs/ISC Logo inline black v3.pdf}
+    \includegraphics[height=1.9cm]{figs/ISC_logo_inline_v1.pdf}
 	};
 \end{tikzpicture}
 
@@ -1374,8 +1376,6 @@ $endif$
 %     \includegraphics[height=1.8cm]{figs/ISC_logo_rvb.pdf}
 % 	};
 % \end{tikzpicture}
-
-\vspace{4mm}
 
 {\Huge \bfseries $title$}\\
 {\large $ue$ $course$\par}
