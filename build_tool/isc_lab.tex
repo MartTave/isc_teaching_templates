@@ -591,17 +591,17 @@ $endif$
 \else % if not pdftex
   $if(mainfont)$
   $else$
-  
+
 
   % Changed by mui for Xetex
   \usepackage[default, lining]{sourcesanspro}
-  
+
   % \usepackage[]{sourcecodepro}
-  % \usepackage[scaled=1.05]{beramono}   
-  % \usepackage[scale=1.1]{sourcecodepro}  
+  % \usepackage[scaled=1.05]{beramono}
+  % \usepackage[scale=1.1]{sourcecodepro}
 
   % At last, here are the correct options with correct straight quotes, numbers that look good
-  \usepackage[nomap, lining, medium, scaled=1.1]{FiraMono} 
+  \usepackage[nomap, lining, medium, scaled=1.1]{FiraMono}
   \usepackage{fontawesome5}
 
   %\renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
@@ -785,7 +785,7 @@ $if(listings)$
 %   numbers          = left,
 %   xleftmargin      = 2.7em,
 %   framexleftmargin = 2.5em,
-% $endif$  
+% $endif$
   upquote      = true,
   breaklines   = false,
   tabsize      = 2,
@@ -962,13 +962,16 @@ $if(listings)$
   }
 }[keywords,comments,strings]
 
+
+
 \lstdefinelanguage{sql}{
   style = framed,
   keywords={SELECT, FROM, WHERE, AND, OR, IN, LIKE, GROUP, BY,
             ORDER, HAVING, JOIN, ON, CURRENT_DATE, INTERVAL, DESC, ASC, AS, DISTINCT,
             INSERT, UPDATE, DELETE, CREATE, TABLE, VIEW, DROP, ALTER, INDEX,
             CONSTRAINT, PRIMARY, KEY, FOREIGN, REFERENCES, NOT, UNIQUE, INTO,
-            VALUES, EXISTS, SET, LIMIT, FOR, SKIP, LOCKED, COUNT},
+            VALUES, EXISTS, SET, LIMIT, FOR, SKIP, LOCKED, COUNT,
+            AVG, SUM, LEFT, CURRENT_TIMESTAMP, UNION},
   keywords=[2]{INTEGER, INT, VARCHAR, CHAR, TEXT, BOOLEAN, DATE, TIME, TIMESTAMP,
               FLOAT, DOUBLE, DECIMAL, BIGINT, SMALLINT, NULL, JSON, JSONB, SERIAL},
   sensitive=false,
@@ -976,12 +979,10 @@ $if(listings)$
   morecomment=[l]--,
   morestring=[b]',
   morestring=[b]"
-  numbers=left,
-  numberstyle=\tiny\color{gray},
-  numbersep=5pt,
   columns=fullflexible,
   showstringspaces=false,
   tabsize=2,
+  numbers=none,
   keepspaces=true,
   showspaces=false,
   showtabs=false,
@@ -992,6 +993,17 @@ $if(listings)$
   stringstyle=\color{OliveGreen},
 }
 
+\definecolor{darkgreen}{rgb}{0.0, 0.5, 0.0}
+
+\lstset{
+  language=Python,
+  numbers=left,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{violet},
+  commentstyle=\itshape\color{gray},
+  stringstyle=\color{darkgreen}
+}
+\newcommand{\pyinline}[1]{\colorbox{gray!10}{\lstinline[language=Python]{#1}}}
 
 \lstdefinelanguage{json}{
     basicstyle=\ttfamily\small,
@@ -1100,7 +1112,7 @@ $else$
 \usepackage{lastpage}
 \usepackage{graphicx}
 
-% mui - automatic inclusion of loading of paths, to 
+% mui - automatic inclusion of loading of paths, to
 % avoid reproducing the shared files in every sub-directory
 \graphicspath{{figs/}{$TOOLCHAINPATH$/}{./}}
 
@@ -1109,7 +1121,7 @@ $else$
 \newcommand{\hesfootleft}
   {
     \begin{footnotesize}
-      $for(author)$$author$$sep$, $endfor$ $$\mid$$ \emph{$ue$ $course$}      
+      $for(author)$$author$$sep$, $endfor$ $$\mid$$ \emph{$ue$ $course$}
     \end{footnotesize}
   }
 \newcommand{\hesfootmiddle}
@@ -1351,7 +1363,7 @@ $endif$
 % For coping with the logo
 \begin{tikzpicture}[remember picture,overlay]
 	\node[anchor=north east,inner sep=0pt] at ($$(current page.north east)-(1.3cm,0.8cm)$$) {
-    \includegraphics[height=1.5cm]{figs/ISC Logo inline black v3.pdf}
+    \includegraphics[height=1.9cm]{figs/ISC_logo_inline_v1.pdf}
 	};
 \end{tikzpicture}
 
@@ -1361,8 +1373,6 @@ $endif$
 %     \includegraphics[height=1.8cm]{figs/ISC_logo_rvb.pdf}
 % 	};
 % \end{tikzpicture}
-
-\vspace{4mm}
 
 {\Huge \bfseries $title$}\\
 {\large $ue$ $course$\par}

@@ -1,6 +1,6 @@
 #!/bin/bash
 VERSION="1.0.8"
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$( cd -- "$( dirname -- "$(readlink -f "${BASH_SOURCE[0]}")" )" &> /dev/null && pwd )
 DIR="."
 MATH_ENGINE="katex"
 TOC=true
@@ -24,7 +24,7 @@ Help()
    echo "Syntax: build_html.sh [-n input_file] [-h] [-m math_engine] [-t] [-o output_file]"
    echo "options:"
    echo "h     Print this help."
-   echo "n     Name of the file to compile."   
+   echo "n     Name of the file to compile."
    echo "o     Destination directory of the PDF file (default, here)."
    echo "m     Math engine used. Options are mathjax, mathml, katex (default), webtex."
    echo "t     Disable table of contents generation in the HTML output."
@@ -37,10 +37,10 @@ Help()
 # Get the options
 while getopts ":x:m:o:n:th" option; do
    case ${option} in
-      x ) 
+      x )
          TEMPLATE="$OPTARG"
          echo "Using template $TEMPLATE"
-         ;; 
+         ;;
       n ) # Enter a file name
          INPUT_FILE="$OPTARG"
          ;;
@@ -51,11 +51,11 @@ while getopts ":x:m:o:n:th" option; do
       m ) # Math engine used
          MATH_ENGINE=$OPTARG
          echo "Using math engine $MATH_ENGINE"
-         ;;         
-      t ) # Disable toc generation
-         TOC=false         
          ;;
-      o ) # Destination directory of PDF file        
+      t ) # Disable toc generation
+         TOC=false
+         ;;
+      o ) # Destination directory of PDF file
          DEST_PDF="$OPTARG"
          ;;
       \? ) # Invalid option
@@ -95,10 +95,10 @@ else
 fi
 
 if [ -n "$DEST_PDF" ]; then
-   echo "Output generated in ${output} and copied to directory ${DEST_PDF}"   
+   echo "Output generated in ${output} and copied to directory ${DEST_PDF}"
    mv "${output}" "${DEST_PDF}"
-else 
-   echo "Output generated in ${output}" 
+else
+   echo "Output generated in ${output}"
 fi
 
 popd || exit
